@@ -1,3 +1,4 @@
 *.log
 *.pyc
+.virtualenv
 __pycache__
