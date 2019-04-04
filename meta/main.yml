@@ -3,6 +3,8 @@ galaxy_info:
   author: Christopher Torgalson
   description: Role to encapsulate commonly-used LAMP configuration.
 
+  role_name: lamp
+
   license: GPLv2
 
   min_ansible_version: 2.5
