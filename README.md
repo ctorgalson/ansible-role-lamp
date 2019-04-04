@@ -44,9 +44,10 @@ to configure them, see each role's specific documentation:
 ### Notes
 
 1. Many of the variables shown here could be stored in `group_vars/`
-   and/or `host_vars/` (especially when provisioning multiple
-   servers!) and are only included to provide an all-in-one-place
-   look at what's needed to run the playbook.
+   and/or `host_vars/`--especially when provisioning multiple
+   servers! (see `molecule/default` for a working example)--and are
+   only included to provide an all-in-one-place look at what's needed
+   to use the role in a playbook.
 
    If the variables were stored elsewhere, this playbook could be as
    simple as:
