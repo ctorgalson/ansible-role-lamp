@@ -1,0 +1,6 @@
+---
+# tasks file for php config in ansible-role-lamp.
+
+- name: Run geerlingguy.php role.
+  import_role:
+    name: geerlingguy.php

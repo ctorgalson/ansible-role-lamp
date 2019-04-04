@@ -1,0 +1,8 @@
+---
+# tasks file for ansible-role-lamp
+
+# - name: Run setup tasks.
+#   include_tasks: setup.yml
+
+# - name: Run PHP configuration tasks.
+#   include_tasks: php.yml
