@@ -1,5 +1,7 @@
 # Ansible Role LAMP
 
+[![Build Status](https://travis-ci.org/ctorgalson/ansible-role-lamp.svg?branch=master)](https://travis-ci.org/ctorgalson/ansible-role-lamp)
+
 This role sets up the AMP part of a LAMP stack using geerlingguy.* roles.
 
 The role does not provide any defaults, tasks, or vars. All roles are
