@@ -66,7 +66,7 @@ to configure them, see each role's specific documentation:
 3. Though `geerlingguy.apache-php-fpm` is listed as a dependency, it
    relies on variables in `geerlingguy.php` to be configured and
    enabled. This means it's possible to configure a server to run
-   php-cgi with this role.
+   php-cgi (i.e. and _not_ php-fpm) with this role.
 
 ### Example
 
