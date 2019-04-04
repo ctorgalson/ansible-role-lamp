@@ -38,6 +38,7 @@ to configure them, see each role's specific documentation:
 - [geerlingguy.mysql](https://galaxy.ansible.com/geerlingguy/mysql)
 - [geerlingguy.apache](https://galaxy.ansible.com/geerlingguy/apache)
 - [geerlingguy.php](https://galaxy.ansible.com/geerlingguy/php)
+- [geerlingguy.apache-php-fpm](https://galaxy.ansible.com/geerlingguy/apachei-php-fpm)
 
 ## Example Playbook
 
@@ -61,6 +62,11 @@ to configure them, see each role's specific documentation:
    Other server configuration tasks such as security setup and
    even creating the vhost directory need to be handled by other tasks
    or roles in your playbooks.
+
+3. Though `geerlingguy.apache-php-fpm` is listed as a dependency, it
+   relies on variables in `geerlingguy.php` to be configured and
+   enabled. This means it's possible to configure a server to run
+   php-cgi with this role.
 
 ### Example
 
