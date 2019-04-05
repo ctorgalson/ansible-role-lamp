@@ -6,3 +6,4 @@ lamp_configure:
   - mysql
   - apache
   - php
+  - composer
