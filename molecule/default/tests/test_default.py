@@ -63,7 +63,7 @@ def test_mysql_root_login(host, user, password, command, output):
 def test_php_version(host):
     v = host.run('php --version')
 
-    assert 'PHP 7.3' in v.stdout
+    assert 'PHP 7.0' in v.stdout
 
 
 """ Verify PHP packages are present. """
@@ -106,8 +106,8 @@ def test_running_services(host, service, status):
 
 
 def test_php_and_apache(host):
-    c = host.run('curl 127.0.0.1:80')
+    c = host.run('curl lamp:80')
 
-    assert 'PHP 7.3' in c.stdout
+    assert 'PHP 7.0' in c.stdout
     assert 'lamp_db' in c.stdout
     assert 'ERROR' not in c.stdout
