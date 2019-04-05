@@ -42,3 +42,8 @@ dependencies:
     tags:
       - php
       - fpm
+  - role: geerlingguy.composer
+    when: "'composer' in lamp_configure"
+    tags:
+      - php
+      - composer
