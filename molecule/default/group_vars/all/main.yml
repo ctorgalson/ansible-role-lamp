@@ -8,6 +8,11 @@ apache_mods_enabled:
   - "headers.load"
   - "rewrite.load"
 
+# geerlingguy.composer vars.
+composer_home_path: "/home/{{ app_owner }}/.composer"
+composer_home_owner: "{{ app_owner }}"
+composer_home_group: "{{ app_owner }}"
+
 # geerlingguy.mysql vars.
 mysql_packages:
   - "mariadb-client"
