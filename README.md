@@ -18,10 +18,10 @@ But with this setup, it is possible to provide variables:
 - from the calling playbook (see `molecule/default/playbook.yml`),
 - using group variables (see `molecule/default/group_vars/`).
 
-This means that for LAMP setups where the set and order of roles defined
-in `dependencies` (in `meta/main.yml`) is acceptable, this role provides
-a way to quickly setup the AMP part of the stack on an Ubuntu server
-(tested on Xenial, but should work elsewhere).
+The role itself only provides a single variable (see **Role Variables**
+below) that are used to determine which roles to run (by default, we run
+`weareinteractive.apt`, `geerlingguy.mysql`, `geerlingguy.apache`, and
+`geerlingguy.php`).
 
 ## Requirements
 
@@ -29,7 +29,9 @@ This role has no special requirements.
 
 ## Role Variables
 
-This role provides no variables of its own.
+| Variable name     | Default value | Description |
+|-------------------|---------------|-------------|
+| `lamp_configure`  | `['apt', 'mysql', 'apache', 'php']` | A list 'AMP' items to configure. Possible values include `apache`, `apt`, `fpm`, `mysql`, and `php` |
 
 ## Dependencies
 
@@ -65,15 +67,19 @@ to configure them, see each role's specific documentation:
    even creating the vhost directory need to be handled by other tasks
    or roles in your playbooks.
 
-3. Though `geerlingguy.apache-php-fpm` is listed as a dependency, it
-   relies on variables in `geerlingguy.php` to be configured and
-   enabled. This means it's possible to configure a server to run
-   php-cgi (i.e. and _not_ php-fpm) with this role.
+3. To exclude certain dependencies from execution, see **Role
+   Variables**, above.
 
 ### Example
 
     - hosts: all
       vars:
+        # ctorgalson.lamp variables.
+        lamp_configure:
+          - apt
+          - mysql
+          - apache
+          - php
         # geerlingguy.apache vars.
         apache_remove_default_vhost: true
         apache_mods_enabled:
