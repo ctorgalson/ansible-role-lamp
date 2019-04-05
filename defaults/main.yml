@@ -1,0 +1,8 @@
+---
+# defaults for ansible-role-lamp.
+
+lamp_configure:
+  - apt
+  - mysql
+  - apache
+  - php

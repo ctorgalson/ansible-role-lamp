@@ -1,5 +1,13 @@
 ---
-# Host vars for the molecule test host "lamp".
+# Host vars for the molecule test host "lamp" (phpfpm).
+
+# Role-specific vars.
+lamp_configure:
+  - apt
+  - mysql
+  - apache
+  - php
+  - fpm
 
 # App vars.
 app_hostname: "lamp"
