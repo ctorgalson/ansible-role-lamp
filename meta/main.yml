@@ -21,8 +21,24 @@ galaxy_info:
     - php
 
 dependencies:
-  - weareinteractive.apt
-  - geerlingguy.mysql
-  - geerlingguy.apache
-  - geerlingguy.php
-  - geerlingguy.apache-php-fpm
+  - role: weareinteractive.apt
+    when: "'apt' in lamp_configure"
+    tags:
+      - apt
+  - role: geerlingguy.mysql
+    when: "'mysql' in lamp_configure"
+    tags:
+      - mysql
+  - role: geerlingguy.apache
+    when: "'apache' in lamp_configure"
+    tags:
+      - apache
+  - role: geerlingguy.php
+    when: "'php' in lamp_configure"
+    tags:
+      - php
+  - role: geerlingguy.apache-php-fpm
+    when: "'fpm' in lamp_configure"
+    tags:
+      - php
+      - fpm
