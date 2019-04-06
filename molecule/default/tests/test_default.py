@@ -102,6 +102,15 @@ def test_running_services(host, service, status):
     assert status in s.stdout
 
 
+""" Verify Composer is correctly installed for non-root user. """
+
+
+def test_composer(host):
+    c = host.run('sudo -u jenkins composer about')
+
+    assert 'Composer - Dependency Manager for PHP' in c.stdout
+
+
 """ Verify PHP files are served correctly by Apache. """
 
 

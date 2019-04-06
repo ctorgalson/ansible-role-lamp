@@ -31,7 +31,7 @@ This role has no special requirements.
 
 | Variable name     | Default value | Description |
 |-------------------|---------------|-------------|
-| `lamp_configure`  | `['apt', 'mysql', 'apache', 'php']` | A list 'AMP' items to configure. Possible values include `apache`, `apt`, `fpm`, `mysql`, and `php` |
+| `lamp_configure`  | `['apt', 'mysql', 'apache', 'php', 'composer']` | A list 'AMP' items to configure. Possible values include `apache`, `apt`, `fpm`, `mysql`, `php`, and `composer` |
 
 ## Dependencies
 
@@ -42,11 +42,12 @@ to configure them, see each role's specific documentation:
 - [geerlingguy.mysql](https://galaxy.ansible.com/geerlingguy/mysql)
 - [geerlingguy.apache](https://galaxy.ansible.com/geerlingguy/apache)
 - [geerlingguy.php](https://galaxy.ansible.com/geerlingguy/php)
+- [geerlingguy.composer](https://galaxy.ansible.com/geerlingguy/composer)
 - [geerlingguy.apache-php-fpm](https://galaxy.ansible.com/geerlingguy/apachei-php-fpm)
 
 ## Example Playbook
 
-### Notes
+## Role Use
 
 1. Many of the variables shown here could be stored in `group_vars/`
    and/or `host_vars/`--especially when provisioning multiple
@@ -70,7 +71,11 @@ to configure them, see each role's specific documentation:
 3. To exclude certain dependencies from execution, see **Role
    Variables**, above.
 
-### Example
+4. Becuase the roles are declared _as dependencies_, they must all be
+   installed/present. If you don't use many/most of the dependencies,
+   this role may not be suitable for your use.
+
+## Example
 
     - hosts: all
       vars:

@@ -3,11 +3,14 @@
 
 # Role-specific vars.
 lamp_configure:
+  - files
   - mysql
   - apache
   - php
+  - composer
 
 # App vars.
+app_owner: "jenkins"
 app_hostname: "lamp"
 app_vhost_dir: "/var/www/{{ app_hostname }}"
 app_vhost_docroot: "{{ app_vhost_dir }}/web"

@@ -1,0 +1,14 @@
+---
+# Prepare tasks common to all ansible-role-lamp scenarios.
+
+- name: Create jenkins user.
+  user:
+    name: "jenkins"
+
+- name: Install required packages.
+  include_role:
+    name: weareinteractive.apt
+  vars:
+    apt_packages:
+      - curl
+      - vim

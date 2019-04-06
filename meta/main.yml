@@ -25,6 +25,11 @@ dependencies:
     when: "'apt' in lamp_configure"
     tags:
       - apt
+  - role: ctorgalson.files
+    when: "'files' in lamp_configure"
+    tags:
+      - files
+      - apache
   - role: geerlingguy.mysql
     when: "'mysql' in lamp_configure"
     tags:
@@ -42,3 +47,8 @@ dependencies:
     tags:
       - php
       - fpm
+  - role: geerlingguy.composer
+    when: "'composer' in lamp_configure"
+    tags:
+      - php
+      - composer

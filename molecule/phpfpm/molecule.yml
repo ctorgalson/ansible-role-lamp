@@ -12,6 +12,13 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+    enabled: true
+    options:
+      x:
+        # ansible-lint throws a `[404] Doesn't need a relative path in role`
+        # error in playbook.yml's copy task _even though it refers to a file
+        # that is not in the same directory_.
+        - '404'
 scenario:
   name: phpfpm
 verifier:

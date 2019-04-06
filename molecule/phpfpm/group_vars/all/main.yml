@@ -1,5 +1,12 @@
 ---
-# Group vars for all hosts.
+# Group vars for all hosts (phpfpm).
+
+files_files:
+  - path: "/var/www/lamp/web"
+    state: directory
+    owner: "jenkins"
+    group: "www-data"
+    mode: "ug=rwx,o=rx"
 
 # geerlingguy.apache vars.
 apache_remove_default_vhost: true
