@@ -16,7 +16,8 @@ setup:
 But with this setup, it is possible to provide variables:
 
 - from the calling playbook (see `molecule/default/playbook.yml`),
-- using group variables (see `molecule/default/group_vars/`).
+- using group and host variables (see `molecule/default/group_vars/` and
+  `molecule/default/host_vars`).
 
 The role itself only provides a single variable (see **Role Variables**
 below) that are used to determine which roles to run (by default, we run
@@ -46,8 +47,6 @@ to configure them, see each role's specific documentation:
 - [geerlingguy.composer](https://galaxy.ansible.com/geerlingguy/composer)
 - [geerlingguy.apache-php-fpm](https://galaxy.ansible.com/geerlingguy/apachei-php-fpm)
 
-## Example Playbook
-
 ## Role Use
 
 1. Many of the variables shown here could be stored in `group_vars/`
@@ -65,9 +64,8 @@ to configure them, see each role's specific documentation:
        - role: ansible-role-lamp
    ```
 2. This playbook _only_ handles setting up Apache, MySql and PHP.
-   Other server configuration tasks such as security setup and
-   even creating the vhost directory need to be handled by other tasks
-   or roles in your playbooks.
+   Other server configuration tasks such as security setup need to be
+   handled by other tasks or roles in your playbooks.
 
 3. To exclude certain dependencies from execution, see **Role
    Variables**, above.
@@ -76,7 +74,7 @@ to configure them, see each role's specific documentation:
    installed/present. If you don't use many/most of the dependencies,
    this role may not be suitable for your use.
 
-## Example
+## Example Playbook
 
     - hosts: all
       vars:
