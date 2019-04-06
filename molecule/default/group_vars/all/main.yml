@@ -1,6 +1,14 @@
 ---
 # Group vars for all hosts.
 
+# ctorgalson.files vars.
+files_files:
+  - path: "/var/www/lamp/web"
+    state: directory
+    owner: "jenkins"
+    group: "www-data"
+    mode: "ug=rwx,o=rx"
+
 # geerlingguy.apache vars.
 apache_remove_default_vhost: true
 apache_mods_enabled:

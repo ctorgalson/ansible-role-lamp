@@ -3,6 +3,7 @@
 
 # Role-specific vars.
 lamp_configure:
+  - files
   - mysql
   - apache
   - php
