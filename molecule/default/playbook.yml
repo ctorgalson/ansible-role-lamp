@@ -15,7 +15,7 @@
   post_tasks:
     - name: Create a test PHP file.
       copy:
-        src: "{{ playbook_dir }}/files/index.php"
+        src: "{{ playbook_dir }}/../files/index.php"
         dest: "/var/www/lamp/web/index.php"
         owner: "jenkins"
         group: "jenkins"
