@@ -4,6 +4,7 @@
 # Role-specific vars.
 lamp_configure:
   - apt
+  - files
   - mysql
   - apache
   - php
