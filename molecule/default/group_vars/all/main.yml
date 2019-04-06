@@ -1,5 +1,5 @@
 ---
-# Group vars for all hosts.
+# Group vars for all hosts (default).
 
 # ctorgalson.files vars.
 files_files:

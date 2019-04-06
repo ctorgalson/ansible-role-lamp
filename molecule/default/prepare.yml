@@ -1,16 +1,7 @@
 ---
+# Prepare playbook for `default` scenario.
 - name: Prepare
   hosts: all
-
-  vars:
-    # weareinteractive.apt vars.
-    apt_packages:
-      - curl
-
-  pre_tasks:
-    - name: Create jenkins user.
-      user:
-        name: "jenkins"
-
-  roles:
-    - role: weareinteractive.apt
+  tasks:
+    - name: Include required common tasks.
+      include_tasks: "{{ playbook_dir }}/../tasks/prepare.yml"
