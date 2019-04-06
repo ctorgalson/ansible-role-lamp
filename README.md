@@ -20,8 +20,8 @@ But with this setup, it is possible to provide variables:
 
 The role itself only provides a single variable (see **Role Variables**
 below) that are used to determine which roles to run (by default, we run
-`weareinteractive.apt`, `geerlingguy.mysql`, `geerlingguy.apache`, and
-`geerlingguy.php`).
+`weareinteractive.apt`, `ctorgalson.files`, `geerlingguy.mysql`,
+`geerlingguy.apache`, `geerlingguy.php`, and `geerlingguy.composer`).
 
 ## Requirements
 
@@ -31,7 +31,7 @@ This role has no special requirements.
 
 | Variable name     | Default value | Description |
 |-------------------|---------------|-------------|
-| `lamp_configure`  | `['apt', 'mysql', 'apache', 'php', 'composer']` | A list 'AMP' items to configure. Possible values include `apache`, `apt`, `fpm`, `mysql`, `php`, and `composer` |
+| `lamp_configure`  | `['apt', 'files', 'mysql', 'apache', 'php', 'composer']` | A list 'AMP' items to configure. Possible values include `apache`, `apt`, `files`, `fpm`, `mysql`, `php`, and `composer` |
 
 ## Dependencies
 
@@ -39,6 +39,7 @@ This role includes several Galaxy roles as dependencies. For details on how
 to configure them, see each role's specific documentation:
 
 - [weareinteractive.apt](https://galaxy.ansible.com/weareinteractive/apt)
+- [ctorgalson.files](https://galaxy.ansible.com/ctorgalson/files)
 - [geerlingguy.mysql](https://galaxy.ansible.com/geerlingguy/mysql)
 - [geerlingguy.apache](https://galaxy.ansible.com/geerlingguy/apache)
 - [geerlingguy.php](https://galaxy.ansible.com/geerlingguy/php)
@@ -79,12 +80,22 @@ to configure them, see each role's specific documentation:
 
     - hosts: all
       vars:
-        # ctorgalson.lamp variables.
+        # ctorgalson.files vars.
+        files_files:
+          - path: "/var/www/lamp/web"
+            state: directory
+            owner: "jenkins"
+            group: "www-data"
+            mode: "ug=rwx,o=rx"
+
+        # ctorgalson.lamp var.
         lamp_configure:
           - apt
+          - files
           - mysql
           - apache
           - php
+
         # geerlingguy.apache vars.
         apache_remove_default_vhost: true
         apache_mods_enabled:
@@ -94,6 +105,11 @@ to configure them, see each role's specific documentation:
         apache_vhosts:
           - servername: "lamp"
             documentroot: "/var/www/lamp/web"
+
+        # geerlingguy.composer vars.
+        composer_home_path: "/home/{{ app_owner }}/.composer"
+        composer_home_owner: "{{ app_owner }}"
+        composer_home_group: "{{ app_owner }}"
 
         # geerlingguy.mysql vars.
         mysql_packages:
