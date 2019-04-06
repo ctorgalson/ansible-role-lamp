@@ -20,3 +20,4 @@
         owner: "jenkins"
         group: "jenkins"
         mode: "u=rw,go=r"
+      changed_when: false
