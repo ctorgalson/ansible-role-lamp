@@ -115,7 +115,7 @@ def test_composer(host):
 
 
 def test_php_and_apache(host):
-    c = host.run('curl lamp:80')
+    c = host.run('curl https://lamp')
 
     assert 'PHP 7.0' in c.stdout
     assert 'lamp_db' in c.stdout

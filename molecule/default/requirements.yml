@@ -1,6 +1,8 @@
 ---
 - src: ctorgalson.files
   version: v1.0.0
+- src: ctorgalson.ssl
+  version: v0.2.3
 - src: geerlingguy.apache
   version: 3.0.3
 - src: geerlingguy.apache-php-fpm
