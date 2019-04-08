@@ -3,21 +3,24 @@
   hosts: all
 
   vars:
+    # ctorgalson.lamp vars.
+    lamp_configure:
+      - files
+      - ssl
+      - mysql
+      - apache
+      - php
+      - composer
+
     # geerlingguy.php vars.
     #
     # This variable included here to demonstrate that in-playbook vars are
     # correctly inherited.
-    php_default_version_debian: "7.0"
+    php_default_version_debian: "7.3"
 
   roles:
     - role: ansible-role-lamp
 
   post_tasks:
-    - name: Create a test PHP file.
-      copy:
-        src: "{{ playbook_dir }}/../files/index.php"
-        dest: "/var/www/lamp/web/index.php"
-        owner: "jenkins"
-        group: "jenkins"
-        mode: "u=rw,go=r"
-      changed_when: false
+    - name: Run common post_tasks.
+      include_tasks: "{{ playbook_dir }}/../tasks/post.yml"

@@ -21,7 +21,7 @@ But with this setup, it is possible to provide variables:
 
 The role itself only provides a single variable (see **Role Variables**
 below) that are used to determine which roles to run (by default, we run
-`weareinteractive.apt`, `ctorgalson.files`, `geerlingguy.mysql`,
+`weareinteractive.apt`, `ctorgalson.files`, `ctorgalson.ssl`, `geerlingguy.mysql`,
 `geerlingguy.apache`, `geerlingguy.php`, and `geerlingguy.composer`).
 
 ## Requirements
@@ -32,7 +32,7 @@ This role has no special requirements.
 
 | Variable name     | Default value | Description |
 |-------------------|---------------|-------------|
-| `lamp_configure`  | `['apt', 'files', 'mysql', 'apache', 'php', 'composer']` | A list 'AMP' items to configure. Possible values include `apache`, `apt`, `files`, `fpm`, `mysql`, `php`, and `composer` |
+| `lamp_configure`  | `['apt', 'files', 'ssl', 'mysql', 'apache', 'php', 'composer']` | A list 'AMP' items to configure. Possible values include `apache`, `apt`, `files`, `ssl`, `fpm`, `mysql`, `php`, and `composer` |
 
 ## Dependencies
 
@@ -41,6 +41,7 @@ to configure them, see each role's specific documentation:
 
 - [weareinteractive.apt](https://galaxy.ansible.com/weareinteractive/apt)
 - [ctorgalson.files](https://galaxy.ansible.com/ctorgalson/files)
+- [ctorgalson.ssl](https://galaxy.ansible.com/ctorgalson/ssl)
 - [geerlingguy.mysql](https://galaxy.ansible.com/geerlingguy/mysql)
 - [geerlingguy.apache](https://galaxy.ansible.com/geerlingguy/apache)
 - [geerlingguy.php](https://galaxy.ansible.com/geerlingguy/php)
@@ -94,6 +95,28 @@ to configure them, see each role's specific documentation:
           - apache
           - php
 
+        # ctorgalson.ssl vars.
+        ssl_directories:
+          - path: "/etc/ssl/certs"
+            owner: root
+            group: root
+            mode: "u=rwx,go=rx"
+          - path: "/etc/ssl/private"
+            owner: root
+            group: root
+            mode: "u=rwx,go=rx"
+        ssl_files:
+          - src: "{{ playbook_dir }}/files/certs/lamp.crt"
+            dest: "/etc/ssl/certs/lamp.crt"
+            owner: root
+            group: root
+            mode: "u=rw,go=r"
+          - src: "{{ playbook_dir }}/files/certs/lamp.key"
+            dest: "/etc/ssl/private/lamp.key"
+            owner: root
+            group: root
+            mode: "u=rw,go="
+
         # geerlingguy.apache vars.
         apache_remove_default_vhost: true
         apache_mods_enabled:
@@ -105,9 +128,9 @@ to configure them, see each role's specific documentation:
             documentroot: "/var/www/lamp/web"
 
         # geerlingguy.composer vars.
-        composer_home_path: "/home/{{ app_owner }}/.composer"
-        composer_home_owner: "{{ app_owner }}"
-        composer_home_group: "{{ app_owner }}"
+        composer_home_path: "/home/jenkins/.composer"
+        composer_home_owner: "jenkins"
+        composer_home_group: "jenkins"
 
         # geerlingguy.mysql vars.
         mysql_packages:

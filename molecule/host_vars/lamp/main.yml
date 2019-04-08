@@ -1,0 +1,56 @@
+---
+# Host vars for the molecule test host "lamp" (all scenarios).
+
+# App vars.
+app_owner: "jenkins"
+app_hostname: "lamp"
+app_vhost_dir: "/var/www/{{ app_hostname }}"
+app_vhost_docroot: "{{ app_vhost_dir }}/web"
+app_ssl_cert_dir: "/etc/ssl/certs"
+app_ssl_private_dir: "/etc/ssl/private"
+app_ssl_cert_filename: "lamp.crt"
+app_ssl_key_filename: "lamp.key"
+
+# ctorgalson.ssl vars.
+ssl_directories:
+  - path: "{{ app_ssl_cert_dir }}"
+    owner: root
+    group: root
+    mode: "u=rwx,go=rx"
+  - path: "{{ app_ssl_private_dir }}"
+    owner: root
+    group: root
+    mode: "u=rwx,go=rx"
+ssl_files:
+  - src: "{{ playbook_dir }}/../files/certs/{{ app_ssl_cert_filename }}"
+    dest: "{{ app_ssl_cert_dir }}/{{ app_ssl_cert_filename }}"
+    owner: root
+    group: root
+    mode: "u=rw,go=r"
+  - src: "{{ playbook_dir }}/../files/certs/{{ app_ssl_key_filename }}"
+    dest: "{{ app_ssl_private_dir }}/{{ app_ssl_key_filename }}"
+    owner: root
+    group: root
+    mode: "u=rw,go="
+
+# geerlingguy.apache vars.
+apache_vhosts:
+  - servername: "{{ app_hostname }}"
+    documentroot: "{{ app_vhost_docroot }}"
+apache_vhosts_ssl:
+  - servername: "{{ app_hostname }}"
+    documentroot: "{{ app_vhost_docroot }}"
+    certificate_file: "{{ app_ssl_cert_dir }}/{{ app_ssl_cert_filename }}"
+    certificate_key_file: "{{ app_ssl_private_dir }}/{{ app_ssl_key_filename }}"
+
+# geerlingguy.mysql vars.
+mysql_root_password: "lamp_root_password"
+mysql_databases:
+  - name: "lamp_db"
+    encoding: "utf8"
+    collation: "utf8_general_ci"
+mysql_users:
+  - name: "lamp_user"
+    host: "localhost"
+    password: "lamp_user_password"
+    priv: "lamp_db.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES"

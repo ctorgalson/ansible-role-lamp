@@ -30,6 +30,11 @@ dependencies:
     tags:
       - files
       - apache
+  - role: ctorgalson.ssl
+    when: "'ssl' in lamp_configure"
+    tags:
+      - ssl
+      - apache
   - role: geerlingguy.mysql
     when: "'mysql' in lamp_configure"
     tags:

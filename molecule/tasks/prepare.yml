@@ -12,3 +12,18 @@
     apt_packages:
       - curl
       - vim
+
+- name: Generate SSL cert locally for tests.
+  command: "{{ cmd }}"
+  loop:
+    - openssl genrsa -out {{ key_path }} 2048
+    - openssl rsa -in {{ key_path }} -out {{ key_path }}
+    - openssl req -sha256 -new -key {{ key_path }} -out {{ csr_path }} -subj '/CN=lamp'
+    - openssl x509 -req -sha256 -days 365 -in {{ csr_path }} -signkey {{ key_path }} -out {{ crt_path }}
+  loop_control:
+    loop_var: cmd
+  vars:
+    crt_path: "{{ playbook_dir }}/../files/certs/lamp.crt"
+    key_path: "{{ playbook_dir }}/../files/certs/lamp.key"
+    csr_path: "{{ playbook_dir }}/../files/certs/lamp.csr"
+  delegate_to: localhost
