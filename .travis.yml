@@ -11,5 +11,5 @@ install:
   - pip install docker
 script:
   # Run default and php-fpm scenarios.
-  - molecule test
+  - molecule --debug test
   - molecule test -s phpfpm
