@@ -1,6 +1,7 @@
 ---
-# Group vars for all hosts (phpfpm).
+# Group vars for all hosts (all scenarios).
 
+# ctorgalson.files vars.
 files_files:
   - path: "/var/www/lamp/web"
     state: directory
@@ -13,8 +14,13 @@ apache_remove_default_vhost: true
 apache_mods_enabled:
   - "expires.load"
   - "headers.load"
-  - "proxy.load"
   - "rewrite.load"
+  - "ssl.load"
+
+# geerlingguy.composer vars.
+composer_home_path: "/home/{{ app_owner }}/.composer"
+composer_home_owner: "{{ app_owner }}"
+composer_home_group: "{{ app_owner }}"
 
 # geerlingguy.mysql vars.
 mysql_packages:
@@ -36,7 +42,6 @@ php_packages:
   - "php{{ php_default_version_debian }}-common"
   - "php{{ php_default_version_debian }}-curl"
   - "php{{ php_default_version_debian }}-dev"
-  - "php{{ php_default_version_debian }}-fpm"
   - "php{{ php_default_version_debian }}-gd"
   - "php{{ php_default_version_debian }}-imap"
   - "php{{ php_default_version_debian }}-json"
@@ -49,8 +54,8 @@ php_packages:
   - "php-sqlite3"
   - "php-apcu"
   - "php-redis"
-php_enable_php_fpm: true
-php_fpm_listen: "127.0.0.1:9000"
+  - "libapache2-mod-php{{ php_default_version_debian }}"
+php_enable_php_fpm: false
 
 # weareinteractive.apt roles.
 apt_repositories:

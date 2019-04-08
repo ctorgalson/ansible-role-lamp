@@ -1,5 +1,5 @@
 ---
-# Host vars for the molecule test host "lamp" (default scenario).
+# Host vars for the molecule test host "lamp" (all scenarios).
 
 # App vars.
 app_owner: "jenkins"
@@ -10,15 +10,6 @@ app_ssl_cert_dir: "/etc/ssl/certs"
 app_ssl_private_dir: "/etc/ssl/private"
 app_ssl_cert_filename: "lamp.crt"
 app_ssl_key_filename: "lamp.key"
-
-# ctorgalson.lamp vars.
-lamp_configure:
-  - files
-  - ssl
-  - mysql
-  - apache
-  - php
-  - composer
 
 # ctorgalson.ssl vars.
 ssl_directories:
@@ -63,13 +54,3 @@ mysql_users:
     host: "localhost"
     password: "lamp_user_password"
     priv: "lamp_db.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES"
-
-# geerlingguy.php vars.
-php_default_version_debian: "7.2"
-php_enable_php_fpm: false
-
-# weareinteractive.apt vars.
-apt_repositories:
-  - repo: "ppa:ondrej/php"
-    codename: xenial
-    update_cache: true
