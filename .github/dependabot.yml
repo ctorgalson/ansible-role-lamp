@@ -1,0 +1,36 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  reviewers:
+  - ctorgalson
+  assignees:
+  - ctorgalson
+  ignore:
+  - dependency-name: ansible
+    versions:
+    - 2.10.0
+    - 2.7.16
+    - 2.7.17
+  - dependency-name: docker
+    versions:
+    - 4.4.1
+    - 4.4.2
+    - 4.4.3
+    - 4.4.4
+  - dependency-name: pytest
+    versions:
+    - 6.2.2
+  - dependency-name: pbr
+    versions:
+    - 5.5.1
+  - dependency-name: cerberus
+    versions:
+    - 1.3.2
+  - dependency-name: jinja2
+    versions:
+    - 2.10.1
